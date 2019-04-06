@@ -9,7 +9,7 @@ get_positions(RH, limit_output = TRUE)
 \arguments{
 \item{RH}{object class RobinHood}
 
-\item{limit_output}{(logical) if true, return a simplified positions table, false returns all positions details}
+\item{limit_output}{(logical) if true, return a simplified positions table, false returns all position details}
 }
 \description{
 Get the currently held positions for your RobinHood account

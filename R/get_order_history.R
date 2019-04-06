@@ -16,24 +16,23 @@ get_order_history <- function(RH) {
 
   # Get Order History
   order_history <- api_orders(RH, action = "history")
-  order_history <- fromJSON(rawToChar(order_history$content))
-  order_history <- order_history$results
 
   # Get symbol to attach to output
   symbol <- as.character()
 
   for (i in order_history$instrument) {
-    x <- api_instruments(RH, i)
+    x <- api_instruments(RH, instrument_url = i)
     x <- x$symbol
     symbol <- c(symbol, x)
   }
 
   # Combine symbol with order history
   order_history$symbol <- symbol
-  order_history <- order_history[, c("updated_at", "symbol", "side", "price", "quantity", "fees", "state",
-                                   "average_price", "type", "trigger", "time_in_force")]
+  order_history <- order_history[, c("created_at", "symbol", "side", "price", "quantity", "fees", "state",
+                                   "average_price", "type", "trigger", "time_in_force", "updated_at")]
 
   # Format timestamp
+  order_history$created_at <- ymd_hms(order_history$created_at)
   order_history$updated_at <- ymd_hms(order_history$updated_at)
   order_history$fees <- as.numeric(order_history$fees)
   order_history$price <- as.numeric(order_history$price)

@@ -1,7 +1,7 @@
 #' Get the currently held positions for your RobinHood account
 #'
 #' @param RH object class RobinHood
-#' @param limit_output (logical) if true, return a simplified positions table, false returns all positions details
+#' @param limit_output (logical) if true, return a simplified positions table, false returns all position details
 #' @import curl jsonlite magrittr lubridate
 #' @export
 #' @examples
@@ -19,13 +19,17 @@ get_positions <- function(RH, limit_output = TRUE) {
   # Get current positions
   positions <- api_positions(RH)
 
+  if (nrow(positions) == 0)  {
+    return(cat("You have no current positions"))
+  }
+
   ##############################################################################
   # Use instrument IDs to get the ticker symbol and name
   instrument_id <- positions$instrument
   instruments <- c()
 
   for (i in 1:length(instrument_id)) {
-    instrument <- api_instruments(RH, instrument_id[i])
+    instrument <- api_instruments(RH, instrument_url = instrument_id[i])
 
     x <- data.frame(simple_name = instrument$simple_name, symbol = instrument$symbol)
 
@@ -76,6 +80,7 @@ get_positions <- function(RH, limit_output = TRUE) {
   positions$cost <- with(positions, average_buy_price * quantity)
   positions$current_value <- with(positions, last_trade_price * quantity)
 
+  # Output Options
   if (limit_output == TRUE) {
     # Reorder dataframe
     positions <- positions[, c("simple_name",
@@ -86,27 +91,28 @@ get_positions <- function(RH, limit_output = TRUE) {
                                "cost",
                                "current_value",
                                "updated_at")]
-    } else {
+                             }
 
-      positions <- positions[, c("symbol",
-                                 "simple_name",
-                                 "quantity",
-                                 "average_buy_price",
-                                 "last_trade_price",
-                                 "cost",
-                                 "current_value",
-                                 "shares_held_for_stock_grants",
-                                 "shares_held_for_options_events",
-                                 "shares_held_for_options_collateral",
-                                 "shares_held_for_buys",
-                                 "shares_held_for_sells",
-                                 "shares_pending_from_options_events",
-                                 "pending_average_buy_price",
-                                 "intraday_average_buy_price",
-                                 "intraday_quantity",
-                                 "created_at",
-                                 "updated_at")]
-  }
+  if (limit_output == FALSE) {
+    positions <- positions[, c("symbol",
+                               "simple_name",
+                               "quantity",
+                               "average_buy_price",
+                               "last_trade_price",
+                               "cost",
+                               "current_value",
+                               "shares_held_for_stock_grants",
+                               "shares_held_for_options_events",
+                               "shares_held_for_options_collateral",
+                               "shares_held_for_buys",
+                               "shares_held_for_sells",
+                               "shares_pending_from_options_events",
+                               "pending_average_buy_price",
+                               "intraday_average_buy_price",
+                               "intraday_quantity",
+                               "created_at",
+                               "updated_at")]
+                             }
 
   return(positions)
 }
