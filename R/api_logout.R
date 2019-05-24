@@ -3,7 +3,8 @@
 #' Backend function called by logout(). Sends a logout call and disables your oauth2 token.
 #'
 #' @param RH object of class RobinHood
-#' @import curl jsonlite magrittr
+#' @import curl magrittr
+#' @export
 api_logout <- function(RH) {
 
   detail <- paste("client_id=",

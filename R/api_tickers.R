@@ -4,7 +4,8 @@
 #' on RobinHood.
 #'
 #' @param RH object of class RobinHood
-#' @import curl jsonlite magrittr
+#' @import curl magrittr
+#' @export
 api_tickers <- function(RH) {
 
   cat("Getting stock ticker data from RobinHood.com...")
@@ -18,7 +19,7 @@ api_tickers <- function(RH) {
     handle_setheaders("Authorization" = paste("Bearer", RH$tokens.access_token)) %>%
     curl_fetch_memory(url = url)
 
-  tickers <- fromJSON(rawToChar(tickers$content))
+  tickers <- jsonlite::fromJSON(rawToChar(tickers$content))
 
   output <- tickers$results
 
@@ -28,19 +29,19 @@ api_tickers <- function(RH) {
       handle_setheaders("Authorization" = paste("Bearer", RH$tokens.access_token)) %>%
       curl_fetch_memory(url = tickers$`next`)
 
-    tickers <- fromJSON(rawToChar(tickers$content))
+    tickers <- jsonlite::fromJSON(rawToChar(tickers$content))
 
     x <- tickers$results
 
     output <- rbind(output, x)
 
-    profvis::pause(1)
+    profvis::pause(.25)
   }
 
   # Stopwatch
   end_time <- proc.time() - start_time
 
-  cat("..........COMPLETE (", round(end_time[3] / 60, 2), "minutes)")
+  cat("..........COMPLETE (", round(end_time[3] / 60, 2), "minutes)\n")
 
 
   return(output)

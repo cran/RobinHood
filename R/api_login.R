@@ -5,6 +5,7 @@
 #' @param username (string) RobinHood username
 #' @param password (string) RobinHood password
 #' @import curl jsonlite magrittr
+#' @export
 api_login <- function(username, password) {
 
   # Storage for api data
@@ -15,18 +16,14 @@ api_login <- function(username, password) {
   )
 
   # Get current positions
-  detail <- paste("grant_type=", RH$api_grant_type,
+  detail <- paste("?grant_type=", RH$api_grant_type,
                   "&client_id=", RH$api_client_id,
                   "&username=", username,
                   "&password=", password, sep = "")
 
-  # Log in, get access token
-  auth <- new_handle() %>%
-    handle_setopt(copypostfields = detail) %>%
-    handle_setheaders("Accept" = "application/json") %>%
-    curl_fetch_memory(url = api_endpoints("token"))
-
-  auth <- fromJSON(rawToChar(auth$content))
+  auth <- httr::POST(paste(api_endpoints("token"), detail, sep = ""))
+  auth <- httr::content(auth, type = "json")
+  auth <- jsonlite::fromJSON(rawToChar(auth))
 
   access_token <- auth$access_token
   refresh_token <- auth$refresh_token
