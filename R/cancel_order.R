@@ -4,7 +4,7 @@
 #'
 #' @param RH object of class RobinHood
 #' @param order_url (string) cancel url returned from place_order()
-#' @import curl magrittr
+#' @import httr magrittr
 #' @export
 #' @examples
 #' \dontrun{
@@ -26,14 +26,14 @@
 #'}
 cancel_order <- function(RH, order_url) {
 
-  if (class(RH) != "RobinHood") stop("RH must be class RobinHood, see RobinHood()")
+  check_rh(RH)
 
   order_status <- api_orders(RH, action = "cancel", order_url)
 
   if (length(order_status) == 0) cat("Order Canceled")
 
   if (length(order_status) >  0) {
-    cat("You may have already canceled this order, check order_status()")
+    cat("You may have already canceled this order, check get_order_status()")
   }
 
 }

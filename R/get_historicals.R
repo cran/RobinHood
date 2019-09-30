@@ -6,7 +6,7 @@
 #' @param symbol (string) Stock symbol to query, single symbol only
 #' @param interval (string) Interval of time to aggregate to (examples: hour, day, week, month)
 #' @param span (string) Period of time you are interested in (examples: day, week, month, year)
-#' @import curl magrittr
+#' @import httr magrittr
 #' @export
 #' @examples
 #' \dontrun{
@@ -18,14 +18,20 @@
 #'}
 get_historicals <- function(RH, symbol, interval, span) {
 
-  historicals_url = api_endpoints("historicals")
+    # Check if RH is valid
+    check_rh(RH)
 
-  body <- paste("symbols=", symbol,
-                "&interval=", interval,
-                "&span=", span,
-                sep = "")
+    # Call the historical price position endpoint
+    historicals_url <- api_endpoints("historicals")
 
-  historicals <- api_historicals(RH, historicals_url, body)
+    # Create the api url
+    body <- paste("symbols=", symbol,
+                  "&interval=", interval,
+                  "&span=", span,
+                  sep = "")
 
-  return(historicals)
+    # Call the historical api for price history
+    historicals <- api_historicals(RH, historicals_url, body)
+
+    return(historicals)
   }

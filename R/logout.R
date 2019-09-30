@@ -3,7 +3,7 @@
 #' Send a logout call through the RobinHood API service and disable your token.
 #'
 #' @param RH object of class RobinHood
-#' @import curl magrittr
+#' @import httr magrittr
 #' @export
 #' @examples
 #' \dontrun{
@@ -13,13 +13,16 @@
 #' logout(RH)
 #'}
 logout <- function(RH) {
-  if (class(RH) != "RobinHood") stop("RH must be class RobinHood, see RobinHood()")
 
-  x <- api_logout(RH)
+    # Check if RH is valid
+    check_rh(RH)
 
-  if (length(x) == 0) {
-    cat("Logout Sucessful")
-  } else {
-    cat("Failed to Logout")
+    # API request to revoke token
+    x <- api_logout(RH)
+
+    if (length(x) == 0) {
+      cat("Logout Sucessful")
+    } else {
+      cat("Failed to Logout")
+    }
   }
-}

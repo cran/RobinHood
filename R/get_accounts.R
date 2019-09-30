@@ -1,7 +1,7 @@
-#' Get account data related to your RobinHood account
+#' Get data related to your RobinHood account
 #'
 #' @param RH object of class RobinHood
-#' @import curl magrittr
+#' @import httr magrittr
 #' @export
 #' @examples
 #' \dontrun{
@@ -12,10 +12,12 @@
 #'}
 get_accounts <- function(RH) {
 
-  if (class(RH) != "RobinHood") stop("RH must be class RobinHood, see RobinHood()")
+    # Check if RH is valid
+    check_rh(RH)
 
-  accounts <- api_accounts(RH)
+    # Pull RH account data
+    accounts <- api_accounts(RH)
 
-  return(accounts)
+    return(accounts)
 
 }

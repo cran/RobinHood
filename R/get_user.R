@@ -1,7 +1,7 @@
 #' Get personal user data related to your RobinHood account
 #'
 #' @param RH object class RobinHood
-#' @import curl magrittr
+#' @import httr magrittr
 #' @export
 #' @examples
 #' \dontrun{
@@ -11,11 +11,13 @@
 #' get_user(RH)
 #'}
 get_user <- function(RH) {
-  if (class(RH) != "RobinHood") stop("RH must be class RobinHood, see RobinHood()")
 
-  user <- api_user(RH)
-  user$created_at <-  lubridate::ymd_hms(user$created_at)
+    # Check if RH is valid
+    check_rh(RH)
 
-  return(user)
+    # Get request from user information API
+    user <- api_user(RH)
+    user$created_at <-  lubridate::ymd_hms(user$created_at)
 
+    return(user)
 }
