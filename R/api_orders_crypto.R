@@ -33,7 +33,7 @@ api_orders_crypto <- function(RH, action, order_id = NULL, cancel_url = NULL, cu
                          time_in_force = time_in_force,
                          type = type)
 
-    dta <- POST(url = api_endpoints("dta", "crypto"),
+    dta <- POST(url = api_endpoints("orders", "crypto"),
                 add_headers("Accept" = "application/json",
                             "Content-Type" = "application/json",
                             "Authorization" = paste("Bearer", RH$tokens.access_token)),
@@ -69,7 +69,7 @@ api_orders_crypto <- function(RH, action, order_id = NULL, cancel_url = NULL, cu
     dta$cumulative_quantity <- as.numeric(dta$cumulative_quantity)
     dta$price <- as.numeric(dta$price)
     dta$quantity <- as.numeric(dta$quantity)
-    dta$rounded_executed_notional<- as.numeric(dta$rounded_executed_notional)
+    dta$rounded_executed_notional <- as.numeric(dta$rounded_executed_notional)
     dta$created_at <- lubridate::ymd_hms(dta$created_at)
     dta$updated_at <- lubridate::ymd_hms(dta$updated_at)
     dta$updated_at <- lubridate::ymd_hms(dta$last_transaction_at)
@@ -84,7 +84,7 @@ api_orders_crypto <- function(RH, action, order_id = NULL, cancel_url = NULL, cu
     token <- paste("Bearer", RH$tokens.access_token)
 
     # GET call
-    dta <- GET(url,
+    dta <- POST(url,
         add_headers("Accept" = "application/json",
                     "Content-Type" = "application/json",
                     "Authorization" = token))
