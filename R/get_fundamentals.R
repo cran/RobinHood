@@ -65,5 +65,12 @@ get_fundamentals <- function(RH, ticker, include_description = FALSE) {
         fundamentals <- fundamentals[, !names(fundamentals) %in% c("description", "instrument")]
       }
 
+    # Format
+    fundamentals <- fundamentals %>%
+      dplyr::mutate_at(c("open", "high", "low", "volume", "average_volume_2_weeks", "average_volume", "high_52_weeks",
+                         "dividend_yield", "float", "low_52_weeks", "market_cap", "pb_ratio", "pe_ratio",
+                         "shares_outstanding"),
+                       as.numeric)
+
     return(fundamentals)
 }
