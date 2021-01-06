@@ -1,6 +1,6 @@
-b059826e3c3db552dc67031abdb09e39 *DESCRIPTION
-eaf09c5968287a1f523c4078e1c9f7c3 *NAMESPACE
-cad7563f8d4bc0572048935e2b14c0cf *R/RobinHood.R
+eca26bd2372db9054d8dd60ceb376b05 *DESCRIPTION
+376338b11b919f3ab3604aa1fe92c972 *NAMESPACE
+d5677cca45133fbba043b7d8ee7740b6 *R/RobinHood.R
 3325fdf603c1243ca11dfffcb98ed864 *R/api_accounts.R
 b75519aee518aa2e5f332a07fe9d3bf5 *R/api_accounts_crypto.R
 ccfdc2de5e1b4878d08da538964fde54 *R/api_ach.R
@@ -11,7 +11,7 @@ bc6afa5a13d0d49d2bab8468e668e4d4 *R/api_fundamentals.R
 144ded9518162b05daab30e0392ca3c8 *R/api_historicals.R
 7521ca30a1654fb7b921ae12589a6756 *R/api_instruments.R
 321eb03b455de43cb23a011cde4c944c *R/api_instruments_options.R
-8e3ff6293774a1f2cd36c0f73fa08b3e *R/api_login.R
+2fa2d560ed09fa72d2073e7f1637e20a *R/api_login.R
 1b3425822bfb92cdd7dea8132c7e7c4f *R/api_logout.R
 7240b1b8f89c849d5d6aba33bce4b0a7 *R/api_marketdata.R
 4f65ab0ca858b5b704823e0db3a86082 *R/api_markets.R
@@ -33,7 +33,7 @@ a10e873ab8d9be5f8424abc8d648e8e7 *R/api_tag.R
 94c864ab60d733e41708c94ca32e5e04 *R/cancel_order.R
 ff611cc340b14d15c61eefb190a64f94 *R/cancel_order_crypto.R
 43981665093772b3b164277fc04e31b2 *R/cancel_order_options.R
-0c7410fb7c6323a6595ff119acb8b1e5 *R/check_rh.R
+4fd7b200a76ed8ef688712bb836d3859 *R/check_rh.R
 922ad87a51daa4c657b6b374ced7e484 *R/get_accounts.R
 7c208d41dd5e70c3bb46ea2de9fa60f6 *R/get_ach.R
 0b31499967a3b7429c57699601c0256b *R/get_contracts.R
@@ -56,13 +56,13 @@ f4aaa59683ff896e849ca6dd0eea67b4 *R/get_positions_options.R
 76cc2bc077f22abf2db59bd7b5c2a7b6 *R/get_tickers.R
 f8cf93a9fdb2c40eafe722abfb11fb40 *R/get_user.R
 1e41c3eb930f1155feec35ce7c6f8863 *R/logout.R
-0d54727feb575e3d3e0075fb5408912e *R/mod_json.R
+33d2fc11e7f00a3e3e82ae23d8020745 *R/mod_json.R
 2843313cf4170401a481aac5014f88ce *R/place_ach_transfer.R
 f1c570851dd4c0ed3c46578b4fd33fd3 *R/place_order.R
 e280697f988b93333418fea3edcf58b6 *R/place_order_crypto.R
 63b169eb24405c5b67f085ee3c632310 *R/place_order_options.R
 5c94f20332473ae1dd112f827e72dbbf *R/watchlist.R
-027edb10831737ac69deb0c7ccc1c67d *man/RobinHood.Rd
+4813b04b2b578983a7eedfb90c772b75 *man/RobinHood.Rd
 1b17fa2117621bb80392273936d061e1 *man/api_accounts.Rd
 b3bf11538f9dd6887a9b37aba225fe54 *man/api_accounts_crypto.Rd
 35f23457672ca396b55ddb42c4d087a0 *man/api_ach.Rd
@@ -73,7 +73,7 @@ e620430449ce9f9b89435aeebcb83ae5 *man/api_endpoints.Rd
 2e6d8824193fc649b3befa4e9a94e21f *man/api_historicals.Rd
 c9f3853b2f7909747d69354470a7a9f6 *man/api_instruments.Rd
 3c51e3aef054f5f4dafdb36c4c1412e4 *man/api_instruments_options.Rd
-72dc774016c6d78218c53e58cdc1313b *man/api_login.Rd
+4bdd763657e51f9c206bbb77d04d5cb0 *man/api_login.Rd
 b30ad50e78a2b56edca988cc7fb043ee *man/api_logout.Rd
 c6d806592cabe7430091966cd1f63250 *man/api_marketdata.Rd
 5e3e9090d3c59debce747826345369eb *man/api_markets.Rd
