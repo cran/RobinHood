@@ -1,4 +1,4 @@
-#' RobinHood API: Fundamentals
+#' RobinHood API: Market Data
 #'
 #' Returns a dataframe of quantitative market information for a particular option instrument
 #'
@@ -6,7 +6,7 @@
 #' @param instrument (string) a single instrument_id or multiple instrument_urls
 #' @param type (string) one of instrument_id or instrument_url
 #' @import httr magrittr
-
+#' 
 api_marketdata <- function(RH, instrument, type = "instrument_id") {
 
   if (type == "instrument_id") {
@@ -29,6 +29,7 @@ api_marketdata <- function(RH, instrument, type = "instrument_id") {
 
 
   if (type == "instrument_id") {
+    dta[sapply(dta, FUN = is.null)] <- NA
     dta <- as.data.frame(dta)
   } else {
     dta <- as.data.frame(dta$results)
@@ -36,11 +37,15 @@ api_marketdata <- function(RH, instrument, type = "instrument_id") {
 
   # Reformat columns
   dta <- dta %>%
-    dplyr::mutate_at(c("adjusted_mark_price", "ask_price", "bid_price", "break_even_price", "high_price", "last_trade_price",
-                       "low_price", "mark_price", "high_fill_rate_buy_price", "high_fill_rate_sell_price",
-                       "low_fill_rate_buy_price", "low_fill_rate_sell_price", "chance_of_profit_long",
-                       "chance_of_profit_short", "delta", "gamma", "implied_volatility", "rho", "theta", "vega"),
-                     function(x) as.numeric(as.character(x)))
+    dplyr::mutate_at(c("adjusted_mark_price", "ask_price", "bid_price",
+                       "break_even_price", "high_price", "last_trade_price",
+                       "low_price", "mark_price", "previous_close_price",
+                       "high_fill_rate_buy_price", "high_fill_rate_sell_price",
+                       "low_fill_rate_buy_price", "low_fill_rate_sell_price",
+                       "chance_of_profit_long", "chance_of_profit_short", "delta",
+                       "gamma", "implied_volatility", "rho", "theta", "vega"),
+                     function(x) as.numeric(as.character(x))) %>%
+   dplyr::mutate_at("previous_close_date", lubridate::ymd)
 
   return(dta)
 

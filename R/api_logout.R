@@ -4,7 +4,7 @@
 #'
 #' @param RH object of class RobinHood
 #' @import httr magrittr
-
+#' 
 api_logout <- function(RH) {
 
   detail <- paste("?client_id=",

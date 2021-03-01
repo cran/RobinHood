@@ -4,7 +4,7 @@
 #'
 #' @param RH object of class RobinHood
 #' @import httr magrittr
-
+#' 
 api_positions <- function(RH) {
 
   # URL and token
@@ -20,6 +20,11 @@ api_positions <- function(RH) {
   # Format return
   dta <- mod_json(dta, "fromJSON")
   dta <- as.data.frame(dta$results)
+
+  # Stop if data.frame is empty (no positions)
+  if (nrow(dta) == 0) {
+    stop("No positions found")
+  }
 
   dta <- dta %>%
     dplyr::mutate_at(c("shares_held_for_stock_grants", "pending_average_buy_price",

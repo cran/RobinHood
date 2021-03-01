@@ -9,7 +9,7 @@
 #' @param cancel_url (string) URL returned by place_ach_transfer()
 #' @param transfer_url (string) url of your linked account, output of get_ach(RH, "relationships")
 #' @import httr magrittr
-
+#' 
 api_ach <- function(RH, action, amount = NULL, status_url = NULL, cancel_url = NULL, transfer_url = NULL) {
 
   if (action == "transfers") {

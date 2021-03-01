@@ -4,7 +4,7 @@
 #' @param chain_symbol (string) a single ticker symbol
 #' @param type (string) one of call or put
 #' @import httr magrittr
-
+#' 
 api_contracts <- function(RH, chain_symbol, type) {
 
   # URL and token

@@ -19,7 +19,7 @@
 #' @param side (string) "buy" or "sell"
 #' @param page_size (int) for get_order_history, refers to the number of historical records to return
 #' @import httr magrittr
-
+#' 
 api_orders <- function(RH, action, status_url = NULL, cancel_url = NULL, instrument_id = NULL, symbol = NULL, type = NULL,
                        time_in_force = NULL, trigger = NULL, price = NULL, stop_price = NULL, quantity = NULL,
                        side = NULL, page_size = NULL) {

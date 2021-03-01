@@ -1,14 +1,14 @@
-#' RobinHood API: User Crypto
+#' RobinHood API: Historicals crypto
 #'
-#' Backend function which calls the Nummus API to return the account id.
+#' Backend function called by get_historicals_crypto(). Returns a data frame of historical price data.
 #'
 #' @param RH object of class RobinHood
+#' @param url (string) full url coming from get_historicals_crypto
 #' @import httr magrittr
 #' 
-api_accounts_crypto <- function(RH) {
+api_historicals_crypto <- function(RH, url) {
 
-  # URL and token
-  url <- api_endpoints("accounts", "crypto")
+  # url to get historical data
   token <- paste("Bearer", RH$tokens.access_token)
 
   # GET call
@@ -17,11 +17,9 @@ api_accounts_crypto <- function(RH) {
                          "Content-Type" = "application/json",
                          "Authorization" = token))
 
-  # format return
+  # Format return
   dta <- mod_json(dta, "fromJSON")
-  dta <- as.list(dta$results)
-
-  dta$updated_at <- lubridate::ymd_hms(dta$updated_at)
+  dta <- as.data.frame(dta$data_points)
 
   return(dta)
 }

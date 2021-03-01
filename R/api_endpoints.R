@@ -4,7 +4,7 @@
 #'
 #' @param endpoint (string) which api endpoint to look up?
 #' @param source (string) directs api to api.robinhood.com (equity) vs nummus.robinhood.com (crypto)
-
+#' 
 api_endpoints <- function(endpoint, source = "equity") {
 
   api.endpoint <- list(
@@ -17,6 +17,7 @@ api_endpoints <- function(endpoint, source = "equity") {
     forex              = "marketdata/forex/quotes/",
     fundamentals       = "fundamentals/?symbols=",
     historicals        = "quotes/historicals/",
+    historicals_crypto = "marketdata/forex/historicals/",
     markets            = "markets/",
     marketdata_options = "marketdata/options/",
     options            = "options/",
@@ -27,12 +28,13 @@ api_endpoints <- function(endpoint, source = "equity") {
     portfolios         = "portfolios/",
     positions          = "positions/",
     quotes             = "quotes/?symbols=",
+    ratings            = "midlands/ratings/?ids=",
     tags               = "midlands/tags/tag/",
     instruments        = "instruments/",
     token              = "oauth2/token/",
     revoke_token       = "oauth2/revoke_token/",
     user               = "user/",
-    watchlist          = "watchlists/",
+    watchlist          = "midlands/lists/",
     # Nummus endpoints
     url_nummus         = "https://nummus.robinhood.com/",
     accounts_crypto    = "accounts/",

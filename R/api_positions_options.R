@@ -4,7 +4,7 @@
 #'
 #' @param RH object of class RobinHood
 #' @import httr magrittr
-
+#' 
 api_positions_options <- function(RH) {
 
   # URL and token

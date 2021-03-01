@@ -9,8 +9,12 @@
 #' @param detail (logical) if null use header api only, otherwise pass options
 #' @param delete (logical) send delete call
 #' @import httr magrittr
-
+#' 
 api_watchlist <- function(RH, watchlist_url, detail = FALSE, delete = FALSE) {
+
+  # URL and token
+  url <- watchlist_url
+  token <- paste("Bearer", RH$tokens.access_token)
 
   # URL and token
   url <- watchlist_url
@@ -30,7 +34,7 @@ api_watchlist <- function(RH, watchlist_url, detail = FALSE, delete = FALSE) {
 
   }
 
-  # Send a command to create a watchlist
+  # Get all watchlists
   if (delete == FALSE & detail == FALSE) {
 
     # GET call
