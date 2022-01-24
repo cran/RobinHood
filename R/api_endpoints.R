@@ -4,44 +4,45 @@
 #'
 #' @param endpoint (string) which api endpoint to look up?
 #' @param source (string) directs api to api.robinhood.com (equity) vs nummus.robinhood.com (crypto)
-#' 
+#' @export
 api_endpoints <- function(endpoint, source = "equity") {
 
   api.endpoint <- list(
     # RobinHood endpoints
-    url                = "https://api.robinhood.com/",
-    accounts           = "accounts/",
-    ach_transfers      = "ach/transfers/",
-    ach_relationships  = "ach/relationships/",
-    ach_schedules      = "ach/deposit_schedules/",
-    forex              = "marketdata/forex/quotes/",
-    fundamentals       = "fundamentals/?symbols=",
-    historicals        = "quotes/historicals/",
-    historicals_crypto = "marketdata/forex/historicals/",
-    markets            = "markets/",
-    marketdata_options = "marketdata/options/",
-    options            = "options/",
-    option_positions   = "options/positions/",
-    option_orders      = "options/orders/",
-    option_instruments = "options/instruments/",
-    orders             = "orders/",
-    portfolios         = "portfolios/",
-    positions          = "positions/",
-    quotes             = "quotes/?symbols=",
-    ratings            = "midlands/ratings/?ids=",
-    tags               = "midlands/tags/tag/",
-    instruments        = "instruments/",
-    token              = "oauth2/token/",
-    revoke_token       = "oauth2/revoke_token/",
-    user               = "user/",
-    watchlist          = "midlands/lists/",
+    url                 = "https://api.robinhood.com/",
+    accounts            = "accounts/",
+    ach_transfers       = "ach/transfers/",
+    ach_relationships   = "ach/relationships/",
+    ach_schedules       = "ach/deposit_schedules/",
+    forex               = "marketdata/forex/quotes/",
+    fundamentals        = "fundamentals/?symbols=",
+    historicals         = "quotes/historicals/",
+    historicals_crypto  = "marketdata/forex/historicals/",
+    historicals_options = "marketdata/options/historicals/",
+    markets             = "markets/",
+    marketdata_options  = "marketdata/options/",
+    options             = "options/",
+    option_positions    = "options/positions/",
+    option_orders       = "options/orders/",
+    option_instruments  = "options/instruments/",
+    orders              = "orders/",
+    portfolios          = "portfolios/",
+    positions           = "positions/",
+    quotes              = "quotes/?symbols=",
+    ratings             = "midlands/ratings/?ids=",
+    tags                = "midlands/tags/tag/",
+    instruments         = "instruments/",
+    token               = "oauth2/token/",
+    revoke_token        = "oauth2/revoke_token/",
+    user                = "user/",
+    watchlist           = "midlands/lists/",
     # Nummus endpoints
-    url_nummus         = "https://nummus.robinhood.com/",
-    accounts_crypto    = "accounts/",
-    currency_pairs     = "currency_pairs/",
-    holdings_crypto    = "holdings/",
-    orders_crypto      = "orders/",
-    portfolios_crypto  = "portfolios/"
+    url_nummus          = "https://nummus.robinhood.com/",
+    accounts_crypto     = "accounts/",
+    currency_pairs      = "currency_pairs/",
+    holdings_crypto     = "holdings/",
+    orders_crypto       = "orders/",
+    portfolios_crypto   = "portfolios/"
   )
 
   x <- which(names(api.endpoint) == endpoint)

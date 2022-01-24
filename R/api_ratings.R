@@ -5,7 +5,7 @@
 #' @param RH object of class RobinHood
 #' @param symbol (string)
 #' @import httr magrittr
-#' 
+#' @export
 api_ratings <- function(RH, symbol) {
 
   # URL and token

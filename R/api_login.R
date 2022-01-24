@@ -6,7 +6,7 @@
 #' @param password (string) RobinHood password
 #' @param mfa_code (string) Provided by your authentication app
 #' @import httr jsonlite magrittr
-#' 
+#' @export
 api_login <- function(username, password, mfa_code) {
 
   # Storage for api data

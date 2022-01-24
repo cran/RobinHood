@@ -5,7 +5,7 @@
 #' @param RH object of class RobinHood
 #' @param url (string) full url coming from get_historicals_crypto
 #' @import httr magrittr
-#' 
+#' @export
 api_historicals_crypto <- function(RH, url) {
 
   # url to get historical data
@@ -18,7 +18,7 @@ api_historicals_crypto <- function(RH, url) {
                          "Authorization" = token))
 
   # Format return
-  dta <- mod_json(dta, "fromJSON")
+  dta <- RobinHood::mod_json(dta, "fromJSON")
   dta <- as.data.frame(dta$data_points)
 
   return(dta)

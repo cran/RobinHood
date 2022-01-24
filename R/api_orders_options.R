@@ -12,7 +12,7 @@
 #' @param side (string) one of "buy" or "sell"
 #' @param option_id (string) id column returned by get_contracts()
 #' @import httr magrittr
-#' 
+#' @export
 api_orders_options <- function(RH, action, status_url = NULL, cancel_url = NULL, quantity = NULL,
                                direction = NULL, stop_price = NULL, type = NULL, time_in_force = NULL,
                                side = NULL, option_id = NULL) {
