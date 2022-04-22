@@ -22,10 +22,13 @@ api_login <- function(username, password, mfa_code) {
                   "&username=", username,
                   "&password=", password, sep = "")
 
-  url <- paste(api_endpoints("token"), detail, sep = "")
+  url <- paste(RobinHood::api_endpoints("token"), detail, sep = "")
 
   # POST call
-  dta <- POST(url) %>%
+  dta <- httr::POST(url)
+  httr::stop_for_status(dta)
+
+  dta <- dta %>%
     content(type = "json") %>%
     rawToChar() %>%
     jsonlite::fromJSON() %>%
@@ -45,14 +48,17 @@ api_login <- function(username, password, mfa_code) {
   if (length(dta) == 2 & mfa_code != "000000") {
 
     # POST call
-    dta <- POST(url, body = list(mfa_code = mfa_code)) %>%
+    dta <- httr::POST(url, body = list(mfa_code = mfa_code))
+    httr::stop_for_status(dta)
+
+    dta <- dta %>%
       content(type = "json") %>%
       rawToChar() %>%
       jsonlite::fromJSON() %>%
       as.list()
 
-    RH$tokens.access_token = dta$access_token
-    RH$tokens.refresh_token = dta$refresh_token
+    RH$tokens.access_token <- dta$access_token
+    RH$tokens.refresh_token <- dta$refresh_token
   }
 
   return(RH)

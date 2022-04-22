@@ -14,7 +14,7 @@ api_tickers <- function(RH) {
   start_time <- proc.time()
 
   # URL and token
-  url <- api_endpoints("instruments")
+  url <- RobinHood::api_endpoints("instruments")
   token <- paste("Bearer", RH$tokens.access_token)
 
   # GET call
@@ -22,9 +22,10 @@ api_tickers <- function(RH) {
              add_headers("Accept" = "application/json",
                          "Content-Type" = "application/json",
                          "Authorization" = token))
+  httr::stop_for_status(dta)
 
   # Format return
-  dta <- mod_json(dta, "fromJSON")
+  dta <- RobinHood::mod_json(dta, "fromJSON")
 
   output <- dta$results
 
@@ -39,9 +40,10 @@ api_tickers <- function(RH) {
                add_headers("Accept" = "application/json",
                            "Content-Type" = "application/json",
                            "Authorization" = token))
+    httr::stop_for_status(dta)
 
     # Format return
-    dta <- mod_json(dta, "fromJSON")
+    dta <- RobinHood::mod_json(dta, "fromJSON")
 
     output <- rbind(output, dta$results)
 

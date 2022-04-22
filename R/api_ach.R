@@ -23,6 +23,7 @@ api_ach <- function(RH, action, amount = NULL, status_url = NULL, cancel_url = N
                add_headers("Accept" = "application/json",
                            "Content-Type" = "application/json",
                            "Authorization" = token))
+    httr::stop_for_status(dta)
 
     # format return
     dta <- RobinHood::mod_json(dta, "fromJSON")
@@ -49,6 +50,7 @@ api_ach <- function(RH, action, amount = NULL, status_url = NULL, cancel_url = N
                add_headers("Accept" = "application/json",
                            "Content-Type" = "application/json",
                            "Authorization" = token))
+    httr::stop_for_status(dta)
 
     # format return
     dta <- RobinHood::mod_json(dta, "fromJSON")
@@ -76,6 +78,7 @@ api_ach <- function(RH, action, amount = NULL, status_url = NULL, cancel_url = N
                add_headers("Accept" = "application/json",
                            "Content-Type" = "application/json",
                            "Authorization" = token))
+    httr::stop_for_status(dta)
 
     # format return
     dta <- RobinHood::mod_json(dta, "fromJSON")
@@ -109,6 +112,7 @@ api_ach <- function(RH, action, amount = NULL, status_url = NULL, cancel_url = N
                  rawToChar() %>%
                  jsonlite::fromJSON() %>%
                  as.list()
+    httr::stop_for_status(dta)
 
     # Select elements
     dta <- list(
@@ -149,6 +153,8 @@ api_ach <- function(RH, action, amount = NULL, status_url = NULL, cancel_url = N
                             "Content-Type" = "application/json",
                             "Authorization" = token)) %>%
                 mod_json("fromJSON")
+    httr::stop_for_status(dta)
+
   }
 
 
@@ -167,7 +173,10 @@ api_ach <- function(RH, action, amount = NULL, status_url = NULL, cancel_url = N
                 add_headers("Accept" = "application/json",
                             "Content-Type" = "application/json",
                             "Authorization" = token),
-                body = mod_json(detail, "toJSON")) %>%
+                body = mod_json(detail, "toJSON"))
+    httr::stop_for_status(dta)
+
+    dta <- dta %>%
       content(type = "json") %>%
       rawToChar() %>%
       jsonlite::fromJSON() %>%

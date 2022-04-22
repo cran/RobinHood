@@ -1,7 +1,7 @@
 Package: RobinHood
 Type: Package
 Title: Interface for the RobinHood.com No Commission Investing Platform
-Version: 1.6.2
+Version: 1.6.5
 Author: Joseph Blubaugh
 Maintainer: Joseph Blubaugh <jestonblu@gmail.com>
 Description: Execute API calls to the RobinHood <https://robinhood.com> investing platform. Functionality includes accessing account data and current holdings, retrieving investment statistics and quotes, placing and canceling orders, getting market trading hours, searching investments by popular tag, and interacting with watch lists.
@@ -10,6 +10,6 @@ License: GPL-3
 URL: https://github.com/JestonBlu/RobinHood
 RoxygenNote: 7.1.2
 NeedsCompilation: no
-Packaged: 2022-01-24 12:54:36 UTC; jeston
+Packaged: 2022-04-22 03:00:46 UTC; jeston
 Repository: CRAN
-Date/Publication: 2022-01-24 13:12:42 UTC
+Date/Publication: 2022-04-22 03:10:02 UTC

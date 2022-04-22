@@ -20,6 +20,7 @@ api_contracts <- function(RH, chain_symbol, type) {
              add_headers("Accept" = "application/json",
                          "Content-Type" = "application/json",
                          "Authorization" = token))
+  httr::stop_for_status(dta)
 
   # format return
   dta <- RobinHood::mod_json(dta, "fromJSON")

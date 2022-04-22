@@ -22,7 +22,7 @@ api_orders_crypto <- function(RH, action, order_id = NULL, cancel_url = NULL, cu
   if (action == "order") {
 
     ref_id <- uuid::UUIDgenerate()
-    account_id <- api_accounts_crypto(RH)$id
+    account_id <- RobinHood::api_accounts_crypto(RH)$id
 
     detail <- data.frame(account_id = account_id,
                          currency_pair_id = currency_pair_id,
@@ -37,9 +37,10 @@ api_orders_crypto <- function(RH, action, order_id = NULL, cancel_url = NULL, cu
                 add_headers("Accept" = "application/json",
                             "Content-Type" = "application/json",
                             "Authorization" = paste("Bearer", RH$tokens.access_token)),
-                body = mod_json(detail, type = "toJSON"))
+                body = RobinHood::mod_json(detail, type = "toJSON"))
+    httr::stop_for_status(dta)
 
-    dta <- mod_json(dta, type = "fromJSON")
+    dta <- RobinHood::mod_json(dta, type = "fromJSON")
 
     dta$cumulative_quantity <- as.numeric(dta$cumulative_quantity)
     dta$price <- as.numeric(dta$price)
@@ -54,7 +55,7 @@ api_orders_crypto <- function(RH, action, order_id = NULL, cancel_url = NULL, cu
   if (action == "status") {
 
     # URL and token
-    url <- paste(api_endpoints("orders", source = "crypto"), order_id, sep = "")
+    url <- paste(RobinHood::api_endpoints("orders", source = "crypto"), order_id, sep = "")
     token <- paste("Bearer", RH$tokens.access_token)
 
     # GET call
@@ -62,9 +63,10 @@ api_orders_crypto <- function(RH, action, order_id = NULL, cancel_url = NULL, cu
         add_headers("Accept" = "application/json",
                     "Content-Type" = "application/json",
                     "Authorization" = token))
+    httr::stop_for_status(dta)
 
     # format return
-    dta <- mod_json(dta, "fromJSON")
+    dta <- RobinHood::mod_json(dta, "fromJSON")
 
     dta$cumulative_quantity <- as.numeric(dta$cumulative_quantity)
     dta$price <- as.numeric(dta$price)
@@ -88,9 +90,10 @@ api_orders_crypto <- function(RH, action, order_id = NULL, cancel_url = NULL, cu
         add_headers("Accept" = "application/json",
                     "Content-Type" = "application/json",
                     "Authorization" = token))
+    httr::stop_for_status(dta)
 
     # format return
-    dta <- mod_json(dta, "fromJSON")
+    dta <- RobinHood::mod_json(dta, "fromJSON")
 
     return(dta)
   }
@@ -99,7 +102,7 @@ api_orders_crypto <- function(RH, action, order_id = NULL, cancel_url = NULL, cu
   if (action == "history") {
 
     # URL and token
-    url <- api_endpoints("orders_crypto", source = "crypto")
+    url <- RobinHood::api_endpoints("orders_crypto", source = "crypto")
     token <- paste("Bearer", RH$tokens.access_token)
 
     # GET call
@@ -107,9 +110,10 @@ api_orders_crypto <- function(RH, action, order_id = NULL, cancel_url = NULL, cu
                add_headers("Accept" = "application/json",
                            "Content-Type" = "application/json",
                            "Authorization" = token))
+    httr::stop_for_status(dta)
 
     # format return
-    dta <- mod_json(dta, "fromJSON")
+    dta <- RobinHood::mod_json(dta, "fromJSON")
     output <- as.data.frame(dta$results)
 
     # Cycle through the pages
@@ -123,9 +127,10 @@ api_orders_crypto <- function(RH, action, order_id = NULL, cancel_url = NULL, cu
                  add_headers("Accept" = "application/json",
                              "Content-Type" = "application/json",
                              "Authorization" = token))
+      httr::stop_for_status(dta)
 
       # Format return
-      dta <- mod_json(dta, "fromJSON")
+      dta <- RobinHood::mod_json(dta, "fromJSON")
 
       output <- rbind(output, dta$results)
 

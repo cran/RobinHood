@@ -18,9 +18,10 @@ api_portfolios_crypto <- function(RH) {
              add_headers("Accept" = "application/json",
                          "Content-Type" = "application/json",
                          "Authorization" = token))
+  httr::stop_for_status(dta)
 
   # format return
-  dta <- mod_json(dta, "fromJSON")
+  dta <- RobinHood::mod_json(dta, "fromJSON")
   dta <- as.list(dta)
 
   dta$equity <- as.numeric(dta$equity)

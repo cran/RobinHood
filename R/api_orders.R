@@ -27,7 +27,7 @@ api_orders <- function(RH, action, status_url = NULL, cancel_url = NULL, instrum
 
   if (action == "order") {
 
-    url <- api_endpoints("orders")
+    url <- RobinHood::api_endpoints("orders")
     token <- paste("Bearer", RH$tokens.access_token)
 
     detail <- data.frame(account = RH$url.account_id,
@@ -53,8 +53,9 @@ api_orders <- function(RH, action, status_url = NULL, cancel_url = NULL, instrum
                             "Content-Type" = "application/json",
                             "Authorization" = token),
                 body = mod_json(detail, type = "toJSON"))
+    httr::stop_for_status(dta)
 
-    dta <- mod_json(dta, "fromJSON")
+    dta <- RobinHood::mod_json(dta, "fromJSON")
     dta <- as.list(dta)
 
     # Rename URLs
@@ -86,9 +87,10 @@ api_orders <- function(RH, action, status_url = NULL, cancel_url = NULL, instrum
                add_headers("Accept" = "application/json",
                           "Content-Type" = "application/json",
                           "Authorization" = token))
+    httr::stop_for_status(dta)
 
     # format return
-    dta <- mod_json(dta, "fromJSON")
+    dta <- RobinHood::mod_json(dta, "fromJSON")
     dta <- as.list(dta)
 
     # Rename urls
@@ -107,16 +109,17 @@ api_orders <- function(RH, action, status_url = NULL, cancel_url = NULL, instrum
         add_headers("Accept" = "application/json",
                     "Content-Type" = "application/json",
                     "Authorization" = token))
+    httr::stop_for_status(dta)
 
     # Format return
-    dta <- mod_json(dta, "fromJSON")
+    dta <- RobinHood::mod_json(dta, "fromJSON")
 
   }
 
 
   if (action == "history") {
 
-    url <- paste(api_endpoints("orders"), "?page_size=", page_size, sep = "")
+    url <- paste(RobinHood::api_endpoints("orders"), "?page_size=", page_size, sep = "")
     token <- paste("Bearer", RH$tokens.access_token)
 
     # GET call
@@ -124,9 +127,10 @@ api_orders <- function(RH, action, status_url = NULL, cancel_url = NULL, instrum
         add_headers("Accept" = "application/json",
                     "Content-Type" = "application/json",
                     "Authorization" = token))
+    httr::stop_for_status(dta)
 
     # format return
-    dta <- mod_json(dta, "fromJSON")
+    dta <- RobinHood::mod_json(dta, "fromJSON")
     dta <- as.data.frame(dta$results)
 
   }
